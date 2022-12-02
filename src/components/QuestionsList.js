@@ -4,14 +4,14 @@ import Question from './Question';
 import { cards } from '../cards'
 
 
-export default function QuestionsList() {
+export default function QuestionsList({completados, setCompletados}) {
 
     return (
         <ContainerQuestionsListStyled>
             <ul>
                 {cards.map((card) => 
                 <li>
-                    <Question card={card}></Question>
+                    <Question card={card}  completados={completados} setCompletados={setCompletados}></Question>
                 </li>)}
             </ul>
         </ContainerQuestionsListStyled>

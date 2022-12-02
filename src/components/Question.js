@@ -8,7 +8,7 @@ import iconCerto from '../assets/img/icone_certo.png';
 
 
 
-export default function Question({ card }) {
+export default function Question({card, completados, setCompletados}) {
 
     let cont = 0;
 
@@ -18,7 +18,8 @@ export default function Question({ card }) {
     const [displayButtons, setDisplayButtons] = useState("none");
     const [textCard, setTextCard] = useState(card.question);
     const [icon, setIcon] = useState(setaPlay);
-    const [textLineThrough, setTextLineThrough] = useState("none")
+    const [textLineThrough, setTextLineThrough] = useState("none");
+    const [disabledButton, setDisabledButton] = useState(false);
 
 
     function adicionar() {
@@ -50,7 +51,9 @@ export default function Question({ card }) {
                 setIcon(iconCerto)
             }
             adicionar();
-            setTextLineThrough('underline');
+            setTextLineThrough('line-through');
+            setCompletados(completados+=1);
+            setDisabledButton(true);
         }
     }
 
@@ -63,9 +66,9 @@ export default function Question({ card }) {
 
     return (
         <>
-            <ContainerQuestionStyled displayQuestion={displayQuestion} onClick={() => adicionar(card)} cont={cont}>
-                <p textLineThrough={textLineThrough}>pergunta</p>
-                <img src={icon}></img>
+            <ContainerQuestionStyled displayQuestion={displayQuestion} cont={cont} textLineThrough={textLineThrough} disabled>
+                <p>pergunta</p>
+                <button onClick={() => adicionar(card)} disabled={disabledButton} ><img src={icon}></img></button>
             </ContainerQuestionStyled>
 
             <ContainerFlashCardFront displayFrontCard={displayFrontCard}>
@@ -74,7 +77,7 @@ export default function Question({ card }) {
                 <ContainerButtons displayButtons={displayButtons}>
                     <ButtonStyled onClick={() => rotateCard('red')} color={'red'}>Não sei</ButtonStyled>
                     <ButtonStyled onClick={() => rotateCard('orange')} color={'orange'}>Quase não lembrei</ButtonStyled>
-                    <ButtonStyled onClick={() => rotateCard()} color={'green'}>Sei</ButtonStyled>
+                    <ButtonStyled onClick={() => rotateCard('green')} color={'green'}>Sei</ButtonStyled>
                 </ContainerButtons>
             </ContainerFlashCardFront>
         </>

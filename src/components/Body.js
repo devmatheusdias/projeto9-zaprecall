@@ -7,12 +7,13 @@ import { useState } from 'react';
 
 export default function Body(){
 
+    const [completados, setCompletados] = useState(0);
 
     return(
         <BodyContainer>
             <Logo></Logo>
-            <QuestionList ></QuestionList>
-            <Completed></Completed>
+            <QuestionList completados={completados} setCompletados={setCompletados}></QuestionList>
+            <Completed completados={completados}></Completed>
         </BodyContainer>
     );
 }

@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import {cards} from '../cards'
 
-export default function Completed(){
+export default function Completed({completados}){
     return(
         <CompletedContainerStyled>
-            <p>0/{cards.length} CONCLUÍDOS</p>
+            <p>{completados}/{cards.length} CONCLUÍDOS</p>
         </CompletedContainerStyled>
     );
 }
