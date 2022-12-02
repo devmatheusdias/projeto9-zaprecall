@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import Logo from './Logo';
 import QuestionList from './QuestionsList';
 import Completed from './Completed';
+import { useState } from 'react';
 
 export default function Body(){
+
+
     return(
         <BodyContainer>
             <Logo></Logo>
-            <QuestionList></QuestionList>
+            <QuestionList ></QuestionList>
             <Completed></Completed>
         </BodyContainer>
     );

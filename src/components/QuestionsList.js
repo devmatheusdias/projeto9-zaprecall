@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Question from './Question';
+import { cards } from '../cards'
 
-export default function QuestionsList(){
-    return(
+
+export default function QuestionsList() {
+
+    return (
         <ContainerQuestionsListStyled>
-            <Question></Question>
-            {/* <Question></Question>
-            <Question></Question>
-            <Question></Question>
-            <Question></Question>
-            <Question></Question> */}
-
+            <ul>
+                {cards.map((card) => 
+                <li>
+                    <Question card={card}></Question>
+                </li>)}
+            </ul>
         </ContainerQuestionsListStyled>
     );
 }
@@ -20,9 +22,15 @@ export default function QuestionsList(){
 const ContainerQuestionsListStyled = styled.div`
     width: 100%;
     height: 477px;
-    background-color: cyan;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
     position: absolute;
+    overflow-y: auto;
+
+    ul li{
+        margin-bottom: 30px;
+    }
 `
