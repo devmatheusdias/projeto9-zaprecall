@@ -15,7 +15,6 @@ const ContainerLogoStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: crimson;
     padding: 30px 0px;
     box-sizing: border-box;
 

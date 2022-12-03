@@ -8,15 +8,15 @@ import iconCerto from '../assets/img/icone_certo.png';
 
 
 
-export default function Question({card, completados, setCompletados}) {
+export default function Question({ card, completados, setCompletados, key }) {
 
-    let cont = 0;
 
     const [vetor, setVetor] = useState([]);
     const [displayQuestion, setDisplayQuestion] = useState("flex");
     const [displayFrontCard, setDisplayFrontCard] = useState("none");
     const [displayButtons, setDisplayButtons] = useState("none");
     const [textCard, setTextCard] = useState(card.question);
+    const [textColor, setTextColor] = useState("");
     const [icon, setIcon] = useState(setaPlay);
     const [textLineThrough, setTextLineThrough] = useState("none");
     const [disabledButton, setDisabledButton] = useState(false);
@@ -44,31 +44,30 @@ export default function Question({card, completados, setCompletados}) {
 
             if (color == 'red') {
                 setIcon(iconErro)
+                setTextColor('red')
 
             } else if (color == 'orange') {
                 setIcon(iconQuase)
+                setTextColor('orange')
+
             } else {
                 setIcon(iconCerto)
+                setTextColor('green')
+
             }
             adicionar();
             setTextLineThrough('line-through');
-            setCompletados(completados+=1);
+            setCompletados(completados += 1);
             setDisabledButton(true);
         }
     }
 
-    // function setColor(){
-    //     setDisplayFrontCard("none");
-    //     setDisplayQuestion("flex");
-    //     setDisplayButtons("none");
-    //     setTextCard(card.question);
-    // }
 
     return (
         <>
-            <ContainerQuestionStyled displayQuestion={displayQuestion} cont={cont} textLineThrough={textLineThrough} disabled>
-                <p>pergunta</p>
-                <button onClick={() => adicionar(card)} disabled={disabledButton} ><img src={icon}></img></button>
+            <ContainerQuestionStyled displayQuestion={displayQuestion} textColor={textColor} textLineThrough={textLineThrough} disabled>
+                <p>pergunta {card.key}</p>
+                <button onClick={() => adicionar(card)} disabled={disabledButton}><img src={icon}></img></button>
             </ContainerQuestionStyled>
 
             <ContainerFlashCardFront displayFrontCard={displayFrontCard}>
@@ -84,11 +83,6 @@ export default function Question({card, completados, setCompletados}) {
     );
 }
 
-// const Container = styled.div`
-//     background-color: blueviolet;
-//     position: relative;
-// `
-
 const ContainerQuestionStyled = styled.div`
     width: 300px;
     border-radius: 5px;
@@ -103,8 +97,14 @@ const ContainerQuestionStyled = styled.div`
     align-items: center;
     font-size: 16px;
     font-weight: 700;
-    cursor: pointer;
     text-decoration: ${((props) => props.textLineThrough)};
+    color: ${(props) => props.textColor};
+
+    button{
+        cursor: ${props => props.disabledButton ? '' : 'pointer'};
+        border: none;
+        background-color: transparent;
+    }
     
 `
 
@@ -124,7 +124,6 @@ const ContainerFlashCardFront = styled.div`
     font-weight: 400;
     position: relative;
 
-
     a{
         margin-left: auto;
         border: none;
@@ -140,34 +139,6 @@ const ContainerFlashCardFront = styled.div`
 
 
 `
-
-// const ContainerFlashCardBack = styled.div`
-//     width: 299px;
-//     height: 131px;
-//     border-radius: 5px;
-//     box-shadow: 0px 4px 5px rgba(0,0,0, 0.15);
-//     background-color: #FFFFD5;
-//     padding: 15px;
-//     box-sizing: border-box;
-//     position: relative;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     margin-bottom: 15 px;
-
-//     p{
-//         font-size: 18px;
-//         font-weight: 400;
-//         line-height: 21.6px;
-//         color: #333333;
-//     }
-
-//     img{
-//         width: 30px;
-//         height: 20px;
-//     }
-
-// `
 
 const ContainerButtons = styled.div`
     display: ${(props) => props.displayButtons};
