@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Logo from './Logo';
 import QuestionList from './QuestionsList';
 import Completed from './Completed';
+import Home from './home';
 import { useState } from 'react';
 
 export default function Body(){
@@ -11,6 +12,7 @@ export default function Body(){
 
     return(
         <BodyContainer>
+            <Home></Home>
             <Logo></Logo>
             <QuestionList completados={completados} setCompletados={setCompletados}></QuestionList>
             <Completed completados={completados}></Completed>
