@@ -12,10 +12,10 @@ export default function Home() {
     }
 
     return (
-        <ContainerStyled display={display}>
+        <ContainerStyled data-test="footer" display={display}>
             <img src={Logo} />
             <h1>ZapRecall</h1>
-            <button onClick={redirect}>Iniciar Recall!</button>
+            <button data-test="start-btn" onClick={redirect}>Iniciar Recall!</button>
 
         </ContainerStyled>
     );

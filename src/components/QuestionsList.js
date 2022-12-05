@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Question from './Question';
 import { cards } from '../cards'
 
-export default function QuestionsList({completados, setCompletados}) {
+export default function QuestionsList({completados, setCompletados, answers, setAnswers}) {
 
 
     return (
@@ -11,7 +11,7 @@ export default function QuestionsList({completados, setCompletados}) {
             <ul>
                 {cards.map((card) => 
                 <li>
-                    <Question card={card} completados={completados} setCompletados={setCompletados}></Question>
+                    <Question card={card} completados={completados} setCompletados={setCompletados} answers={answers} setAnswers={setAnswers}></Question>
                 </li>)}
             </ul>
         </ContainerQuestionsListStyled>

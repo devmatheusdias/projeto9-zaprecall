@@ -5,17 +5,22 @@ import QuestionList from './QuestionsList';
 import Completed from './Completed';
 import Home from './home';
 import { useState } from 'react';
+import iconErro from '../assets/img/icone_erro.png';
+import iconQuase from '../assets/img/icone_quase.png';
+import iconCerto from '../assets/img/icone_certo.png';
 
-export default function Body(){
+export default function Body() {
 
     const [completados, setCompletados] = useState(0);
+    const [answers, setAnswers] = useState([]);
 
-    return(
+
+    return (
         <BodyContainer>
             <Home></Home>
             <Logo></Logo>
-            <QuestionList completados={completados} setCompletados={setCompletados}></QuestionList>
-            <Completed completados={completados}></Completed>
+            <QuestionList completados={completados} setCompletados={setCompletados} answers={answers} setAnswers={setAnswers}></QuestionList>
+            <Completed completados={completados} answers={answers}></Completed>
         </BodyContainer>
     );
 }

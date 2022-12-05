@@ -8,10 +8,10 @@ import iconCerto from '../assets/img/icone_certo.png';
 
 
 
-export default function Question({ card, completados, setCompletados, key }) {
+
+export default function Question({ card, completados, setCompletados, answers, setAnswers }) {
 
 
-    const [vetor, setVetor] = useState([]);
     const [displayQuestion, setDisplayQuestion] = useState("flex");
     const [displayFrontCard, setDisplayFrontCard] = useState("none");
     const [displayButtons, setDisplayButtons] = useState("none");
@@ -26,6 +26,7 @@ export default function Question({ card, completados, setCompletados, key }) {
         if (displayQuestion == "flex" && displayFrontCard == "none") {
             setDisplayQuestion("none")
             setDisplayFrontCard("flex");
+
         } else {
             setDisplayQuestion("flex")
             setDisplayFrontCard("none");
@@ -45,16 +46,21 @@ export default function Question({ card, completados, setCompletados, key }) {
             if (color == 'red') {
                 setIcon(iconErro)
                 setTextColor('red')
+                setAnswers([...answers, iconErro]);
+
 
             } else if (color == 'orange') {
                 setIcon(iconQuase)
                 setTextColor('orange')
+                setAnswers([...answers, iconQuase]);
 
             } else {
                 setIcon(iconCerto)
                 setTextColor('green')
-
+                setAnswers([...answers, iconCerto]);
             }
+
+
             adicionar();
             setTextLineThrough('line-through');
             setCompletados(completados += 1);
@@ -66,22 +72,24 @@ export default function Question({ card, completados, setCompletados, key }) {
     return (
         <>
             <ContainerQuestionStyled displayQuestion={displayQuestion} textColor={textColor} textLineThrough={textLineThrough} disabled>
-                <p>pergunta {card.key}</p>
-                <button onClick={() => adicionar(card)} disabled={disabledButton}><img src={icon}></img></button>
+                <p data-test="flascard-text">pergunta {card.key}</p>
+                <button data-test="play-btn" onClick={() => adicionar(card)} disabled={disabledButton}><img src={icon}></img></button>
             </ContainerQuestionStyled>
 
             <ContainerFlashCardFront displayFrontCard={displayFrontCard}>
-                <p>{textCard}</p>
-                <a href="#" onClick={() => { rotateCard() }} ><img src={setaVirar} alt="" /></a>
+                <p data-test="flascard-text">{textCard}</p>
+                <a href="#" data-test="turn-btn" onClick={() => { rotateCard() }} ><img src={setaVirar} alt="" /></a>
                 <ContainerButtons displayButtons={displayButtons}>
-                    <ButtonStyled onClick={() => rotateCard('red')} color={'red'}>Não sei</ButtonStyled>
-                    <ButtonStyled onClick={() => rotateCard('orange')} color={'orange'}>Quase não lembrei</ButtonStyled>
-                    <ButtonStyled onClick={() => rotateCard('green')} color={'green'}>Sei</ButtonStyled>
+                    <ButtonStyled data-test="no-btn" onClick={() => rotateCard('red')} color={'red'}>Não sei</ButtonStyled>
+                    <ButtonStyled data-test="partial-btn" onClick={() => rotateCard('orange')} color={'orange'}>Quase não lembrei</ButtonStyled>
+                    <ButtonStyled data-test="zap-btn" onClick={() => rotateCard('green')} color={'green'}>Sei</ButtonStyled>
                 </ContainerButtons>
             </ContainerFlashCardFront>
         </>
     );
 }
+
+
 
 const ContainerQuestionStyled = styled.div`
     width: 300px;
